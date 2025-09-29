@@ -122,6 +122,14 @@ func (p *PeerLocal) Join(sid, uid string, config ...JoinConfig) error {
 			}
 
 			Logger.V(1).Info("Negotiation needed", "peer_id", p.id)
+
+			// ✅ ПРОВЕРКА: Есть ли реальные down tracks перед созданием offer
+			downTracks := p.subscriber.DownTracks()
+			if len(downTracks) == 0 {
+				Logger.V(1).Info("Skipping negotiation - no down tracks", "peer_id", p.id)
+				return
+			}
+
 			offer, err := p.subscriber.CreateOffer()
 			if err != nil {
 				Logger.Error(err, "CreateOffer error")
