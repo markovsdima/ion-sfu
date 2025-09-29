@@ -101,4 +101,24 @@ credentials = "pion=ion,pion2=ion2"
 
 [log]
 # 0 - INFO 1 - DEBUG 2 - TRACE
-v = 1
+v = 2
+
+[signal]
+jsonrpc = { addr = ":7000" }
+
+[rtc]
+port = 5000
+port_range = 200
+
+[webrtc.iceservers]
+# STUN
+iceservers = [
+  { urls = ["stun:stun.l.google.com:19302"] },
+  { urls = ["stun:stun1.l.google.com:19302"] },
+  { urls = ["stun:stun2.l.google.com:19302"] },
+  { urls = ["stun:stun3.l.google.com:19302"] }
+]
+
+[metrics]
+addr = ":8100"
+
